@@ -57,6 +57,7 @@ export default function CheckoutPage() {
   const [whatsappUrl, setWhatsappUrl] = useState('');
   const [countdown, setCountdown] = useState(3);
   const [redirected, setRedirected] = useState(false);
+  const [successTotal, setSuccessTotal] = useState(0);
 
   // Refs
   const autocompleteInputRef = useRef<HTMLInputElement | null>(null);
@@ -277,6 +278,7 @@ export default function CheckoutPage() {
 
       if (response.ok) {
         const data = await response.json();
+        setSuccessTotal(total);
         if (data.whatsappUrl) {
           setWhatsappUrl(data.whatsappUrl);
         }
@@ -538,7 +540,7 @@ export default function CheckoutPage() {
                 </div>
                 <div className="flex justify-between">
                   <span className="text-muted">Order Total:</span>
-                  <span className="font-bold text-accent">₹{total.toFixed(2)}</span>
+                  <span className="font-bold text-accent">₹{successTotal.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-muted">Delivery Address:</span>
